@@ -8,3 +8,14 @@ The purpose of this project was to scrape reviews of a given product. I chose to
 1. Go to the best buy site and choose a product
 2. Substitute the base URL with the URL that leads to the product
 3. Run the program in your favorite IDE, whether that be VSCode, vim and the command line, or PyCharm
+
+## Technologies Used
+1. Selenium (Web Scraping)
+2. Python (Main programming language used to code the scraper)
+3. NLTK (Natural Language Toolkit
+
+## Future Insights
+1. Improve the algorithm for determining an accurate rating based on what words are there (Regular Expressions and Edit Distance)
+2. Create a backend server that allows users to find ratings based on ANY product being searched (on-demand)
+
+### How
