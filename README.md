@@ -2,7 +2,7 @@
 This was project 2 from my CSC 360 - Computer Networking class. This semester, I hope to incorporate more Natural Language Processing from my CSC 427 - Natural Language Processing class into my project.
 
 ## Purpose
-The purpose of this project was to scrape reviews of a given product. I chose to scrape all reviews of the "ASUS - ROG Zephyrus G16 16" OLED 240Hz Gaming Laptop - Intel Core Ultra 9 - 32GB LPDDR5X - NVIDIA GeForce RTX 4090 - 2TB SSD - Eclipse Gray". There are a couple bad apples out there that like to give dishonest ratings, so this program using Natural Language Processing to estimate genuine ratings numbers for each rating.
+The purpose of this project was to scrape reviews of a given product. I chose to scrape all reviews of the "ASUS - ROG Zephyrus G16 16" OLED 240Hz Gaming Laptop - Intel Core Ultra 9 - 32GB LPDDR5X - NVIDIA GeForce RTX 4090 - 2TB SSD - Eclipse Gray". There are a couple bad apples out there that like to give dishonest ratings, so this program using Natural Language Processing to estimate genuine ratings numbers for the given product, and each rating for the given product.
 
 ## How to Use
 1. Go to the best buy site and choose a product
@@ -17,5 +17,3 @@ The purpose of this project was to scrape reviews of a given product. I chose to
 ## Future Insights
 1. Improve the algorithm for determining an accurate rating based on what words are there (Regular Expressions and Edit Distance)
 2. Create a backend server that allows users to find ratings based on ANY product being searched (on-demand)
-
-### How
