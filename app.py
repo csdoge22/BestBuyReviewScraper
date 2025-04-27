@@ -2,8 +2,9 @@ import time
 import random
 import numpy as np
 from selenium import webdriver
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.tree import DecisionTreeClassifier
-import bias_parser
+
 import os
 from os import path
 import pandas as pd
@@ -64,22 +65,48 @@ def run_script():
             descriptionList = pickle.load(file)
     return descriptionList
 
-def train_model():
-    dataset = load_dataset("naga-jay/amazon-laptop-reviews-enriched", split="train")
-    
-    data = np.asarray(dataset["text"])
-    labels = np.asarray(dataset["rating"])
-    
-    classifier = DecisionTreeClassifier()
-    classifier.fit(data, labels)
-    
-    predicted = classifier.predict(run_script())
-    pframe = pd.DataFrame(data={
+def train_test_model():
+    if not os.path.exists("decision_tree_classifier.pkl") or not os.path.exists("tfid_vectorizer.pkl"):
+        dataset = load_dataset("naga-jay/amazon-laptop-reviews-enriched", split="train")
         
-    })
+        data = np.asarray(dataset["text"])
+        labels = np.asarray(dataset["rating"])        
+        
+        vectorizer = TfidfVectorizer()
+        data = vectorizer.fit_transform(data)
+        
+        classifier = DecisionTreeClassifier()
+        classifier.fit(data, labels)
+        
+        new_reviews = run_script()
+        data_new = vectorizer.transform(new_reviews)
+        predicted = classifier.predict(data_new)
+        
+        with open("tfid_vectorizer.pkl", "wb") as file:
+            pickle.dump(vectorizer, file)
+        with open("decision_tree_classifier.pkl", "wb") as file:
+            pickle.dump(classifier, file)
+    else:
+        with open("tfid_vectorizer.pkl", "rb") as file:
+            vectorizer = pickle.load(file)
+        with open("decision_tree_classifier.pkl", "rb") as file:
+            classifier = pickle.load(file)
+        
+        new_reviews = run_script()
+        data_new = vectorizer.transform(new_reviews)
+        predicted = classifier.predict(data_new)
+    
+    format_preds = {
+        "descriptions": new_reviews,
+        "predicted_ratings": list(predicted)
+    }
+    frame = pd.DataFrame(format_preds)
+    frame.to_csv("reviewRatings.csv")
+    return predicted
 
-def determine_rating():
-    """ Using the trained model, produce a rough estimate for the review of the ASUS - ROG Zephyrus G16 (2024) product."""
-    pass
+def find_rating():
+    predictions = np.array(train_test_model())
+    return np.average(predictions)
+
 # run the application
-print(run_script())
+print(find_rating())
