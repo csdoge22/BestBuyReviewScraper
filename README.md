@@ -1,5 +1,5 @@
 # Best Buy Review Scraper
-This was project 2 from my CSC 360 - Computer Networking class. This semester, I hope to incorporate more Natural Language Processing principles from my CSC 427 - Natural Language Processing class.
+This was project 2 from my CSC 360 - Computer Networking class. This semester, I hope to incorporate more Natural Language Processing from my CSC 427 - Natural Language Processing class into my project.
 
 ## Purpose
 The purpose of this project was to scrape reviews of a given product. I chose to scrape all reviews of the "ASUS - ROG Zephyrus G16 16" OLED 240Hz Gaming Laptop - Intel Core Ultra 9 - 32GB LPDDR5X - NVIDIA GeForce RTX 4090 - 2TB SSD - Eclipse Gray". There are a couple bad apples out there that like to give dishonest ratings, so this program using Natural Language Processing to estimate genuine ratings numbers for each rating.
