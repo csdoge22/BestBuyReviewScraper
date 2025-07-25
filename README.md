@@ -1,42 +1,62 @@
-# 🛒 Best Buy Review Scraper & Sentiment Analyzer
+# 🛍️ Best Buy Review Scraper & Rating Predictor
 
-This project is a **web scraping + machine learning pipeline** that estimates genuine product ratings using review data from Best Buy. Originally created for my CSC 360: *Computer Networking* course, I have since extended it with Natural Language Processing (NLP) techniques from CSC 427: *Natural Language Processing*.
-
----
-
-## 📌 Project Overview
-
-Many product reviews online can be **inconsistent, biased, or spammy**. This tool aims to:
-
-- ✅ **Scrape reviews** from a Best Buy product page using Selenium
-- ✅ **Preprocess the review text** and analyze sentiment using a trained classifier
-- ✅ **Predict an average rating** for the product based on its review content
-- ✅ **Export results** to a CSV for transparency and further analysis
+This project uses **Selenium**, **TF-IDF**, and a **Decision Tree Classifier** to scrape reviews from Best Buy and estimate product ratings using Natural Language Processing (NLP). Originally developed as part of my *CSC 360 - Computer Networking* course, this project has since evolved to include techniques from *CSC 427 - Natural Language Processing*.
 
 ---
 
-## ⚙️ How It Works
+## 🔍 Purpose
 
-1. **Web Scraping (Selenium + Firefox)**  
-   Automatically navigates to a Best Buy product page and scrapes all user reviews across multiple pages.
+Scraped reviews can be misleading due to biased or dishonest entries. This tool provides:
 
-2. **Model Training (NLP + scikit-learn)**  
-   Trains a `DecisionTreeClassifier` on enriched Amazon laptop reviews from the `datasets` library using `TfidfVectorizer`.
-
-3. **Rating Prediction**  
-   Applies the trained model to the scraped Best Buy reviews and predicts their likely ratings (1–5 scale).
-
-4. **Output**  
-   - Saves predictions and original review text to `reviewRatings.csv`
-   - Prints the **average predicted rating** to the console
+- Scraping of **real user reviews** from Best Buy.
+- A **machine learning model** that predicts product ratings based on review content.
+- An **estimated average rating** based purely on the text — helpful for determining product quality from genuine user feedback.
 
 ---
 
-## 🚀 Getting Started
+## 🧠 How It Works
 
-### 🔧 Prerequisites
+1. **Web Scraping**  
+   - Uses Selenium to collect all reviews for a given Best Buy product.
 
-Make sure the following Python packages are installed:
+2. **Preprocessing + ML**  
+   - Trains a `TfidfVectorizer` on a labeled Amazon laptop review dataset.
+   - Builds a `DecisionTreeClassifier` to learn text-rating relationships.
+
+3. **Prediction**  
+   - Applies the trained model to newly scraped Best Buy reviews.
+   - Outputs a CSV with predicted ratings and review descriptions.
+   - Returns the **average predicted rating**.
+
+---
+
+## 🚀 How to Run
+
+> Make sure you have [GeckoDriver](https://github.com/mozilla/geckodriver/releases) installed and Firefox available in PATH.
 
 ```bash
-pip install selenium scikit-learn pandas numpy datasets
+# Install dependencies
+pip install selenium scikit-learn numpy pandas datasets
+```
+
+# Run the script
+```bash
+python script.py
+```
+
+# 🔗 Tech Stack
+* Python 3
+* Selenium – Web scraping
+* scikit-learn – ML model & text vectorization
+* HuggingFace Datasets – Labeled data from amazon-laptop-reviews-enriched
+* NumPy + Pandas – Data manipulation
+* Pickle – Efficient storage of intermediate results
+
+# 📂 Outputs
+reviews.pkl: Raw scraped reviews (cached)
+
+tfid_vectorizer.pkl: Trained TF-IDF vectorizer
+
+decision_tree_classifier.pkl: Trained Decision Tree model
+
+reviewRatings.csv: Final CSV with review text and predicted ratings
